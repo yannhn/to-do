@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./App.css";
+import { nanoid } from "nanoid";
 import Header from "./components/Header.js";
 import ToDo from "./components/ToDo";
-import { nanoid } from "nanoid";
+import Footer from "./components/Footer.js";
 
 function App() {
   const [items, setItems] = useState([
@@ -72,6 +72,7 @@ function App() {
           archiveToDo={() => toggleArchive(item.id)}
         ></ToDo>
       ))}
+      <Footer></Footer>
     </div>
   );
 }
