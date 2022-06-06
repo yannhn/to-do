@@ -12,17 +12,15 @@ function ToDo({
   deleteItems,
 }) {
   return (
-    <ToDoContainer>
+    <ToDoContainer completed={completed}>
       <section>
         <ToDoDate date={date}></ToDoDate>
       </section>
-      <section>
-        <button type="button" onClick={toggleCompleted}>
-          {completed ? "completed" : "uncompleted"}
-        </button>
-      </section>
-      <h2>{title}</h2>
-      <section>
+      <ToDoCheckbox archived={archived}>
+        <input type="checkbox" onClick={toggleCompleted}></input>
+      </ToDoCheckbox>
+      <ToDoTitle completed={completed}>{title}</ToDoTitle>
+      <HideButton archived={archived}>
         {completed ? (
           <button type="button" onClick={toggleArchived}>
             archive
@@ -35,7 +33,7 @@ function ToDo({
             </button>
           </section>
         )}
-      </section>
+      </HideButton>
     </ToDoContainer>
   );
 }
@@ -43,9 +41,26 @@ function ToDo({
 export default ToDo;
 
 const ToDoContainer = styled.section`
-  background-color: lightblue;
+  border-radius: 10px;
+  background-color: ${(props) => (props.completed ? "#f07167" : "#0081a7")};
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin: 2em 2em;
+  padding: 1em 2em;
+  margin: 2em 4em;
+`;
+
+const HideButton = styled.section`
+  display: ${(props) => (props.archived ? "none" : "")};
+`;
+
+const ToDoCheckbox = styled.section`
+  display: ${(props) => (props.archived ? "none" : "")};
+`;
+
+const ToDoTitle = styled.h2`
+  text-decoration: ${(props) => (props.completed ? "line-through" : "")};
 `;

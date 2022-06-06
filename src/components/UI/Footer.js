@@ -1,27 +1,41 @@
-// import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
-// function Footer() {
-//   return (
-//     <FooterContainer>
-//       <FooterItems>Home</FooterItems>
-//       <FooterItems>Archive</FooterItems>
-//       <FooterItems>Random</FooterItems>
-//     </FooterContainer>
-//   );
-// }
+function Footer() {
+  return (
+    <FooterContainer>
+      <NavItem to="/">Home</NavItem>
+      <NavItem to="/Archive">Archive</NavItem>
+      <NavItem to="/Random">Random</NavItem>
+    </FooterContainer>
+  );
+}
 
-// export default Footer;
+export default Footer;
 
-// const FooterContainer = styled.ul`
-//   display: flex;
-//   justify-content: space-around;
-//   position: relative;
-//   background-color: lightblue;
-// `;
+const NavItem = styled(NavLink)`
+  padding: 1em 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  list-style: none;
+  text-decoration: none;
+  color: white;
+  transition: 500ms ease;
+  &:hover {
+    transform: scale(1.1);
+    color: crimson;
+  }
+  &.active {
+    transform: scale(1.1);
+    color: crimson;
+  }
+`;
 
-// const FooterItems = styled.li`
-//   text-decoration: none;
-//   list-style-type: none;
-//   position: sticky;
-//   bottom: 0;
-// `;
+const FooterContainer = styled.section`
+  display: flex;
+  justify-content: space-around;
+  background-color: #3d405b;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+`;
