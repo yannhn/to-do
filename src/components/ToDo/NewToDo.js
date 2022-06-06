@@ -3,12 +3,11 @@ import React from "react";
 import InputNewToDo from "./InputNewToDo";
 
 const NewToDo = ({ addNewItem }) => {
-  const saveNewItem = (enteredExpenseData) => {
-    const expenseData = {
-      ...enteredExpenseData,
-      id: Math.random().toString(),
+  const saveNewItem = (enteredItems) => {
+    const dateItems = {
+      ...enteredItems,
     };
-    addNewItem(expenseData);
+    addNewItem(dateItems);
   };
 
   return (
