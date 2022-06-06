@@ -1,3 +1,0 @@
-function NewToDo() {
-  <section></section>;
-}

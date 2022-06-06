@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import ToDoDate from "./ToDoDate";
 
 function ToDo({
   id,
   title,
   completed,
   archived,
+  date,
   toggleCompleted,
   toggleArchived,
   deleteItems,
@@ -12,16 +14,26 @@ function ToDo({
   return (
     <ToDoContainer>
       <section>
-        <button onClick={toggleCompleted}>
+        <ToDoDate date={date}></ToDoDate>
+      </section>
+      <section>
+        <button type="button" onClick={toggleCompleted}>
           {completed ? "completed" : "uncompleted"}
         </button>
       </section>
       <h2>{title}</h2>
       <section>
         {completed ? (
-          <button onClick={toggleArchived}>archive</button>
+          <button type="button" onClick={toggleArchived}>
+            archive
+          </button>
         ) : (
-          <button onClick={deleteItems}>delete</button>
+          <section>
+            <button>edit</button>
+            <button type="button" onClick={deleteItems}>
+              delete
+            </button>
+          </section>
         )}
       </section>
     </ToDoContainer>
