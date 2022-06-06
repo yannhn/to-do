@@ -13,6 +13,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [items, setItems] = useLocalStorage("items", []);
+  const [random, setRandom] = useState({});
 
   function toggleCompleted(id) {
     const completedItems = items.map((item) => {
@@ -47,11 +48,27 @@ function App() {
     });
   };
 
-  const [random, setRandom] = useState(0);
+  //TODO: INSERT EDIT ITEMS
+
+  const [editItems, setEditItems] = useState(null);
+
+  // const editItem = (item, newTitle) => {
+  //   const editedItem = items.map((item) => {
+  //     if (item.id === id) {
+  //       return { ...item, item: newTitle };
+  //     } else {
+  //       return item;
+  //     }
+  //   });
+  //   setItems(editItem);
+  // };
+
+  //TODO: FIX RANDOM ELEMENTS
 
   function randomItem() {
-    const randItem = Math.floor(Math.random() * items.length);
-    setRandom(randItem);
+    const randItems = [Math.floor(Math.random() * items.length)];
+
+    setRandom(randItems);
   }
 
   // function addNewItem(newTitle) {
@@ -105,7 +122,6 @@ function App() {
           element={
             <>
               <Header></Header>
-
               {items
                 .filter((item) => item.archived)
                 .map((item) => (
@@ -123,7 +139,7 @@ function App() {
             </>
           }
         ></Route>
-        {/* <Route
+        <Route
           path="/Random"
           element={
             <>
@@ -135,13 +151,13 @@ function App() {
                 completed={items[random].completed}
                 archived={items[random].archived}
                 date={items[random].date}
-                toggleCompleted={() => toggleCompleted(items.id)}
-                toggleArchived={() => toggleArchived(items.id)}
-                deleteItems={() => deleteItems(items.id)}
+                toggleCompleted={() => toggleCompleted(items[random].id)}
+                toggleArchived={() => toggleArchived(items[random].id)}
+                deleteItems={() => deleteItems(items[random].id)}
               ></ToDo>
             </>
           }
-        ></Route> */}
+        ></Route>
       </Routes>
       <Footer></Footer>
     </>
