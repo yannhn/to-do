@@ -11,6 +11,13 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import { Routes, Route } from "react-router-dom";
 
+// TODO
+// TODO: INSERT EDIT ITEMS
+// TODO: Better integration for inserting new Todos
+
+// FIX
+// FIXME: FIX RANDOM ELEMENTS
+
 function App() {
   const [items, setItems] = useLocalStorage("items", []);
   const [random, setRandom] = useState({});
@@ -42,54 +49,16 @@ function App() {
     setItems(filteredItems);
   }
 
-  const addNewItem = (items) => {
+  function addNewItem(items) {
     setItems((prevItem) => {
       return [items, ...prevItem];
     });
-  };
-
-  //TODO: INSERT EDIT ITEMS
-
-  const [editItems, setEditItems] = useState(null);
-
-  // const editItem = (item, newTitle) => {
-  //   const editedItem = items.map((item) => {
-  //     if (item.id === id) {
-  //       return { ...item, item: newTitle };
-  //     } else {
-  //       return item;
-  //     }
-  //   });
-  //   setItems(editItem);
-  // };
-
-  //TODO: FIX RANDOM ELEMENTS
+  }
 
   function randomItem() {
     const randItems = [Math.floor(Math.random() * items.length)];
-
     setRandom(randItems);
   }
-
-  // function addNewItem(newTitle) {
-  //   const newItems = {
-  //     id: nanoid(),
-  //     title: newTitle,
-  //     completed: false,
-  //     archived: false,
-  //     date: new Date(),
-  //   };
-  //   setItems([...items, newItems]);
-  // }
-
-  // const NewExpense = (props) => {
-  //   const saveExpenseDataHandler = (enteredExpenseData) => {
-  //     const expenseData = {
-  //       ...enteredExpenseData,
-  //       id: Math.random().toString()
-  //     };
-  //     props.onAddExpense(expenseData);
-  //   };
 
   return (
     <>

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import ToDoDate from "./ToDoDate";
 
+// FIX
+// FIXME: Fix date-picker
+
 function ToDo({
   id,
   title,
@@ -68,17 +71,3 @@ const ToDoCheckbox = styled.section`
 const ToDoTitle = styled.h2`
   text-decoration: ${(props) => (props.completed ? "line-through" : "")};
 `;
-
-// .blog-preview {
-//   padding: 10px 16px;
-//   margin: 20px 0;
-//   border-bottom: 1px solid #fafafa;
-// }
-// .blog-preview:hover {
-//   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
-// }
-// .blog-preview h2 {
-//   font-size: 20px;
-//   color: #f1356d;
-//   margin-bottom: 8px;
-// }
