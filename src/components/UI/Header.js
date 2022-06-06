@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import "./HeaderImg";
+// import { HeaderImg } from "./HeaderImg";
 
 function Header() {
   return (
     <TitleContainer>
-      <Title>ToDo App</Title>
+      <Title>
+        ToDo App
+        {/* <HeaderImg /> */}
+      </Title>
     </TitleContainer>
   );
 }
