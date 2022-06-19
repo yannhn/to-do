@@ -64,7 +64,7 @@ function App() {
           path="/"
           element={
             <>
-              <Header></Header>
+              <Header heading={"ToDo-App"}></Header>
               <NewToDo addNewItem={addNewItem}></NewToDo>
               {items
                 .filter((item) => !item.archived)
@@ -87,7 +87,7 @@ function App() {
           path="/Archive"
           element={
             <>
-              <Header></Header>
+              <Header heading={"Archived ToDos"}></Header>
               {items
                 .filter((item) => item.archived)
                 .map((item) => (
@@ -109,7 +109,7 @@ function App() {
           path="/Random"
           element={
             <>
-              <Header></Header>
+              <Header heading={"Random ToDos"}></Header>
               <RandomToDo shuffle={randomItem}></RandomToDo>
               <ToDo
                 key={items[random].id}

@@ -1,15 +1,9 @@
 import styled from "styled-components";
-import "./HeaderImg";
-// import { NavLink } from "react-router-dom";
-// import { HeaderImg } from "./HeaderImg";
 
-function Header() {
+function Header({ heading }) {
   return (
     <TitleContainer>
-      <Title>
-        ToDo App
-        {/* <HeaderImg /> */}
-      </Title>
+      <Title>{heading}</Title>
     </TitleContainer>
   );
 }
