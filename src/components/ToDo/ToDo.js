@@ -1,15 +1,13 @@
 import styled from "styled-components";
-import ToDoDate from "./ToDoDate";
+// import ToDoDate from "./ToDoDate";
 
 // FIX
 // FIXME: Fix date-picker
 
 function ToDo({
-  id,
   title,
   completed,
   archived,
-  date,
   toggleCompleted,
   toggleArchived,
   deleteItems,

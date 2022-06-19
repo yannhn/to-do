@@ -8,19 +8,16 @@ import RandomToDo from "./components/ToDo/RandomToDo";
 
 import useLocalStorage from "./common/useLocalStorage";
 import { useState } from "react";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { Routes, Route } from "react-router-dom";
 
 // TODO
-// TODO: INSERT EDIT ITEMS
+// TODO: EDIT ITEMS
 // TODO: Better integration for inserting new Todos
-
-// FIX
-// FIXME: FIX RANDOM ELEMENTS
 
 function App() {
   const [items, setItems] = useLocalStorage("items", []);
-  const [random, setRandom] = useState({});
+  const [random, setRandom] = useState(0);
 
   function toggleCompleted(id) {
     const completedItems = items.map((item) => {
@@ -119,7 +116,7 @@ function App() {
                 title={items[random].title}
                 completed={items[random].completed}
                 archived={items[random].archived}
-                date={items[random].date}
+                // date={items[random].date}
                 toggleCompleted={() => toggleCompleted(items[random].id)}
                 toggleArchived={() => toggleArchived(items[random].id)}
                 deleteItems={() => deleteItems(items[random].id)}
