@@ -13,7 +13,6 @@ import Card from "./components/UI/Card";
 
 // TODO
 // TODO: EDIT ITEMS
-// TODO: Better integration for inserting new Todos
 
 function App() {
   const [items, setItems] = useLocalStorage("items", []);

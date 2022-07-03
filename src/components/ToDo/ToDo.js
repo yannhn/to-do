@@ -9,7 +9,6 @@ function ToDo({
   toggleCompleted,
   toggleArchived,
   deleteItems,
-  editItems,
 }) {
   return (
     <ToDoContainer>
@@ -26,7 +25,7 @@ function ToDo({
             </button>
           ) : (
             <section>
-              <button onClick={editItems}>edit</button>
+              {/* <button onClick={editItems}>edit</button> */}
               <button type="button" onClick={deleteItems}>
                 delete
               </button>
