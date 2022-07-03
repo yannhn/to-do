@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Card from "../UI/Card";
+
 // import ToDoDate from "./ToDoDate";
 
 function ToDo({
@@ -12,7 +12,7 @@ function ToDo({
   editItems,
 }) {
   return (
-    <Card>
+    <ToDoContainer>
       <section completed={completed}>
         <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
         <section archived={archived}>
@@ -34,25 +34,27 @@ function ToDo({
           )}
         </HideButton>
       </section>
-    </Card>
+    </ToDoContainer>
   );
 }
 
 export default ToDo;
 
-// const ToDoContainer = styled.section`
-//   border-radius: 5px;
-//   background-color: ${(props) => (props.completed ? "#f1356d" : "#347FC4")};
-//   color: white;
-//   font-size: 1.4rem;
-//   font-weight: bold;
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-//   &:hover {
-//     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
-//   }
-// `;
+const ToDoContainer = styled.section`
+  border-radius: 5px;
+  background-color: ${(props) => (props.completed ? "#f1356d" : "#347FC4")};
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 2em;
+  margin: 1em 4em;
+  &:hover {
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+  }
+`;
 
 const HideButton = styled.section`
   display: ${(props) => (props.archived ? "none" : "")};

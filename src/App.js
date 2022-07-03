@@ -9,6 +9,7 @@ import RandomToDo from "./components/ToDo/RandomToDo";
 import useLocalStorage from "./common/useLocalStorage";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import Card from "./components/UI/Card";
 
 // TODO
 // TODO: EDIT ITEMS
@@ -16,7 +17,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [items, setItems] = useLocalStorage("items", []);
-  const [random, setRandom] = useState([]);
+  const [random, setRandom] = useState({});
 
   function toggleCompleted(id) {
     const completedItems = items.map((item) => {
@@ -51,9 +52,17 @@ function App() {
     });
   }
 
-  function randomItem() {
-    const randItems = [Math.floor(Math.random() * items.length)];
-    setRandom(randItems);
+  function randomItems() {
+    // filter archived items
+    // creates new Array with filtered items
+    const filteredItems = items.filter((item) => !item.archived);
+
+    // within the filtered new Array set the randomizer
+    const randomArray = Math.floor(Math.random() * filteredItems.length);
+
+    //
+    const randomItem = filteredItems[randomArray];
+    setRandom(randomItem);
   }
 
   return (
@@ -65,20 +74,22 @@ function App() {
             <>
               <Header heading={"ToDo-App"}></Header>
               <NewToDo addNewItem={addNewItem}></NewToDo>
-              {items
-                .filter((item) => !item.archived)
-                .map((item) => (
-                  <ToDo
-                    key={item.id}
-                    title={item.title}
-                    completed={item.completed}
-                    archived={item.archived}
-                    date={item.date}
-                    toggleCompleted={() => toggleCompleted(item.id)}
-                    toggleArchived={() => toggleArchived(item.id)}
-                    deleteItems={() => deleteItems(item.id)}
-                  ></ToDo>
-                ))}
+              <Card>
+                {items
+                  .filter((item) => !item.archived)
+                  .map((item) => (
+                    <ToDo
+                      key={item.id}
+                      title={item.title}
+                      completed={item.completed}
+                      archived={item.archived}
+                      date={item.date}
+                      toggleCompleted={() => toggleCompleted(item.id)}
+                      toggleArchived={() => toggleArchived(item.id)}
+                      deleteItems={() => deleteItems(item.id)}
+                    ></ToDo>
+                  ))}
+              </Card>
             </>
           }
         ></Route>
@@ -87,20 +98,22 @@ function App() {
           element={
             <>
               <Header heading={"Archived ToDos"}></Header>
-              {items
-                .filter((item) => item.archived)
-                .map((item) => (
-                  <ToDo
-                    key={item.id}
-                    title={item.title}
-                    completed={item.completed}
-                    archived={item.archived}
-                    date={item.date}
-                    toggleCompleted={() => toggleCompleted(item.id)}
-                    toggleArchived={() => toggleArchived(item.id)}
-                    deleteItems={() => deleteItems(item.id)}
-                  ></ToDo>
-                ))}
+              <Card>
+                {items
+                  .filter((item) => item.archived)
+                  .map((item) => (
+                    <ToDo
+                      key={item.id}
+                      title={item.title}
+                      completed={item.completed}
+                      archived={item.archived}
+                      date={item.date}
+                      toggleCompleted={() => toggleCompleted(item.id)}
+                      toggleArchived={() => toggleArchived(item.id)}
+                      deleteItems={() => deleteItems(item.id)}
+                    ></ToDo>
+                  ))}
+              </Card>
             </>
           }
         ></Route>
@@ -109,15 +122,16 @@ function App() {
           element={
             <>
               <Header heading={"Random ToDos"}></Header>
-              <RandomToDo shuffle={randomItem}></RandomToDo>
+              <RandomToDo shuffle={randomItems}></RandomToDo>
+
               <ToDo
                 key={random.id}
                 title={random.title}
                 completed={random.completed}
                 archived={random.archived}
-                toggleCompleted={() => toggleCompleted(items[random].id)}
-                toggleArchived={() => toggleArchived(items[random].id)}
-                deleteItems={() => deleteItems(items[random].id)}
+                toggleCompleted={() => toggleCompleted(random.id)}
+                toggleArchived={() => toggleArchived(random.id)}
+                deleteItems={() => deleteItems(random.id)}
               ></ToDo>
             </>
           }
