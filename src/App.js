@@ -59,8 +59,10 @@ function App() {
     // within the filtered new Array set the randomizer
     const randomArray = Math.floor(Math.random() * filteredItems.length);
 
-    //
+    // run randomArray into filteredItems-Array
     const randomItem = filteredItems[randomArray];
+
+    // setRandom-state filled with randomItem
     setRandom(randomItem);
   }
 
