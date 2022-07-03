@@ -1,14 +1,13 @@
 import Header from "./components/UI/Header";
 import Footer from "./components/UI/Footer";
 import ToDo from "./components/ToDo/ToDo";
-import NewToDo from "./components/ToDo/NewToDo";
+import NewToDo from "./components/NewToDo/NewToDo";
 import RandomToDo from "./components/ToDo/RandomToDo";
 
 // import InputNewToDo from "./ToDo/InputNewToDo";
 
 import useLocalStorage from "./common/useLocalStorage";
 import { useState } from "react";
-// import { nanoid } from "nanoid";
 import { Routes, Route } from "react-router-dom";
 
 // TODO
@@ -17,7 +16,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [items, setItems] = useLocalStorage("items", []);
-  const [random, setRandom] = useState(0);
+  const [random, setRandom] = useState([]);
 
   function toggleCompleted(id) {
     const completedItems = items.map((item) => {
@@ -112,11 +111,10 @@ function App() {
               <Header heading={"Random ToDos"}></Header>
               <RandomToDo shuffle={randomItem}></RandomToDo>
               <ToDo
-                key={items[random].id}
-                title={items[random].title}
-                completed={items[random].completed}
-                archived={items[random].archived}
-                // date={items[random].date}
+                key={random.id}
+                title={random.title}
+                completed={random.completed}
+                archived={random.archived}
                 toggleCompleted={() => toggleCompleted(items[random].id)}
                 toggleArchived={() => toggleArchived(items[random].id)}
                 deleteItems={() => deleteItems(items[random].id)}

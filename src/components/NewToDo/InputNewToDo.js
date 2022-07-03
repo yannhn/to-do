@@ -10,9 +10,9 @@ function InputNewToDo(props) {
     setEnteredTitle(event.target.value);
   };
 
-  const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
-  };
+  // const dateChangeHandler = (event) => {
+  //   setEnteredDate(event.target.value);
+  // };
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -42,15 +42,6 @@ function InputNewToDo(props) {
               onChange={titleChangeHandler}
             ></InputText>
           </label>
-        </section>
-        <section>
-          <label>Date</label>
-          <input
-            type="date"
-            min="2019-01-01"
-            max="2022-12-31"
-            onChange={dateChangeHandler}
-          ></input>
         </section>
         <button type="submit">Add</button>
       </InputForm>
