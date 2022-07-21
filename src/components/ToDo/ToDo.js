@@ -1,39 +1,78 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 // import ToDoDate from "./ToDoDate";
 
 function ToDo({
+  id,
   title,
   completed,
   archived,
   toggleCompleted,
   toggleArchived,
   deleteItems,
+  editItem,
+  editTask,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    editTask(id, newTitle);
+    setIsEditing(false);
+  }
+
   return (
-    <ToDoContainer>
-      <section completed={completed}>
-        <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
-        <section archived={archived}>
-          <input type="checkbox" onClick={toggleCompleted}></input>
-        </section>
-        <h2 completed={completed}>{title}</h2>
-        <HideButton archived={archived}>
-          {completed ? (
-            <button type="button" onClick={toggleArchived}>
-              archive
-            </button>
-          ) : (
-            <section>
-              {/* <button onClick={editItems}>edit</button> */}
-              <button type="button" onClick={deleteItems}>
-                delete
-              </button>
+    <>
+      {isEditing ? (
+        <form onSubmit={handleSubmit}>
+          <section>
+            <label htmlFor="new-text-input" />
+            <input
+              id="new-text-input"
+              type="text"
+              defaultValue={title}
+              onChange={(event) => setNewTitle(event.target.value)}
+            />
+          </section>
+          <section>
+            <button
+              type="button"
+              onClick={() => {
+                setIsEditing(false);
+                setNewTitle("");
+              }}
+            ></button>
+            <button type="submit">CHECK</button>
+          </section>
+        </form>
+      ) : (
+        <ToDoContainer>
+          <section completed={completed}>
+            <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
+            <section archived={archived}>
+              <input type="checkbox" onClick={toggleCompleted}></input>
             </section>
-          )}
-        </HideButton>
-      </section>
-    </ToDoContainer>
+            <h2 completed={completed}>{title}</h2>
+            <HideButton archived={archived}>
+              {completed ? (
+                <button type="button" onClick={toggleArchived}>
+                  archive
+                </button>
+              ) : (
+                <section>
+                  <button onClick={editItem}>edit</button>
+                  <button type="button" onClick={deleteItems}>
+                    delete
+                  </button>
+                </section>
+              )}
+            </HideButton>
+          </section>
+        </ToDoContainer>
+      )}
+    </>
   );
 }
 

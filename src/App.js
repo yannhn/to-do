@@ -51,6 +51,16 @@ function App() {
     });
   }
 
+  function editTask(id, newTitle) {
+    const editedToDos = items.map((item) => {
+      if (id === item.id) {
+        return { ...item, title: newTitle };
+      }
+      return item;
+    });
+    setItems(editedToDos);
+  }
+
   function randomItems() {
     // filter archived items
     // creates new Array with filtered items
@@ -81,6 +91,7 @@ function App() {
                   .map((item) => (
                     <ToDo
                       key={item.id}
+                      id={item.id}
                       title={item.title}
                       completed={item.completed}
                       archived={item.archived}
@@ -88,6 +99,7 @@ function App() {
                       toggleCompleted={() => toggleCompleted(item.id)}
                       toggleArchived={() => toggleArchived(item.id)}
                       deleteItems={() => deleteItems(item.id)}
+                      editTask={editTask}
                     ></ToDo>
                   ))}
               </Card>
