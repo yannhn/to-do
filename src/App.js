@@ -136,7 +136,6 @@ function App() {
             <>
               <Header heading={"Random ToDos"}></Header>
               <RandomToDo shuffle={randomItems}></RandomToDo>
-
               <ToDo
                 key={random.id}
                 title={random.title}

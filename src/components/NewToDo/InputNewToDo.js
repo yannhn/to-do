@@ -6,22 +6,14 @@ function InputNewToDo(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
-  const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
-  };
-
-  // const dateChangeHandler = (event) => {
-  //   setEnteredDate(event.target.value);
-  // };
-
   const submitHandler = (event) => {
     event.preventDefault();
 
     const newItems = {
       id: nanoid(),
       title: enteredTitle,
-      completed: false,
-      archived: false,
+      completed: "",
+      archived: "",
       date: new Date(enteredDate),
     };
 
@@ -39,7 +31,7 @@ function InputNewToDo(props) {
               type="text"
               placeholder="New ToDo"
               value={enteredTitle}
-              onChange={titleChangeHandler}
+              onChange={(event) => setEnteredTitle(event.target.value)}
             ></InputText>
           </label>
         </section>

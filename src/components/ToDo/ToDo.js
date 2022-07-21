@@ -32,7 +32,7 @@ function ToDo({
             <input
               id="new-text-input"
               type="text"
-              defaultValue={title}
+              required
               onChange={(event) => setNewTitle(event.target.value)}
             />
           </section>
@@ -43,34 +43,38 @@ function ToDo({
                 setIsEditing(false);
                 setNewTitle("");
               }}
-            ></button>
-            <button type="submit">CHECK</button>
+            >
+              CANCEL
+            </button>
+            <button type="submit">SAVE</button>
           </section>
         </form>
       ) : (
-        <ToDoContainer>
-          <section completed={completed}>
-            <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
-            <section archived={archived}>
-              <input type="checkbox" onClick={toggleCompleted}></input>
-            </section>
-            <h2 completed={completed}>{title}</h2>
-            <HideButton archived={archived}>
-              {completed ? (
-                <button type="button" onClick={toggleArchived}>
-                  archive
-                </button>
-              ) : (
-                <section>
-                  <button onClick={editItem}>edit</button>
-                  <button type="button" onClick={deleteItems}>
-                    delete
+        <section>
+          <ToDoContainer>
+            <section completed={completed}>
+              <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
+              <section archived={archived}>
+                <input type="checkbox" onClick={toggleCompleted}></input>
+              </section>
+              <h2 completed={completed}>{title}</h2>
+              <HideButton archived={archived}>
+                {completed ? (
+                  <button type="button" onClick={toggleArchived}>
+                    archive
                   </button>
-                </section>
-              )}
-            </HideButton>
-          </section>
-        </ToDoContainer>
+                ) : (
+                  <section>
+                    <button onClick={editItem}>edit</button>
+                    <button type="button" onClick={deleteItems}>
+                      delete
+                    </button>
+                  </section>
+                )}
+              </HideButton>
+            </section>
+          </ToDoContainer>
+        </section>
       )}
     </>
   );
