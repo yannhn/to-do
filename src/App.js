@@ -144,6 +144,7 @@ function App() {
                 toggleCompleted={() => toggleCompleted(random.id)}
                 toggleArchived={() => toggleArchived(random.id)}
                 deleteItems={() => deleteItems(random.id)}
+                editTask={(newTitle) => editTask(random.id, newTitle)}
               ></ToDo>
             </>
           }
