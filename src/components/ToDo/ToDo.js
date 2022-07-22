@@ -14,68 +14,35 @@ function ToDo({
   editItem,
   editTask,
 }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    editTask(id, newTitle);
-    setIsEditing(false);
-  }
-
   return (
     <>
-      {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <section>
-            <label htmlFor="new-text-input" />
-            <input
-              id="new-text-input"
-              type="text"
-              required
-              onChange={(event) => setNewTitle(event.target.value)}
-            />
+      <ToDoContainer completed={completed}>
+        <section completed={completed}>
+          <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
+          <section archived={archived}>
+            <input type="checkbox" onClick={toggleCompleted}></input>
           </section>
-          <section>
-            <button
-              type="button"
-              onClick={() => {
-                setIsEditing(false);
-                setNewTitle("");
-              }}
-            >
-              CANCEL
-            </button>
-            <button type="submit">SAVE</button>
-          </section>
-        </form>
-      ) : (
-        <section>
-          <ToDoContainer>
-            <section completed={completed}>
-              <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
-              <section archived={archived}>
-                <input type="checkbox" onClick={toggleCompleted}></input>
+          <h2 completed={completed}>{title}</h2>
+          <HideButton archived={archived}>
+            {completed ? (
+              <section>
+                <button onClick={toggleCompleted}>Uncompleted</button>
+                <button type="button" onClick={toggleArchived}>
+                  archive
+                </button>
               </section>
-              <h2 completed={completed}>{title}</h2>
-              <HideButton archived={archived}>
-                {completed ? (
-                  <button type="button" onClick={toggleArchived}>
-                    archive
-                  </button>
-                ) : (
-                  <section>
-                    <button onClick={editItem}>edit</button>
-                    <button type="button" onClick={deleteItems}>
-                      delete
-                    </button>
-                  </section>
-                )}
-              </HideButton>
-            </section>
-          </ToDoContainer>
+            ) : (
+              <section completed={completed}>
+                <button onClick={toggleCompleted}>Complete</button>
+                <button onClick={editItem}>edit</button>
+                <button type="button" onClick={deleteItems}>
+                  delete
+                </button>
+              </section>
+            )}
+          </HideButton>
         </section>
-      )}
+      </ToDoContainer>
     </>
   );
 }
@@ -84,7 +51,7 @@ export default ToDo;
 
 const ToDoContainer = styled.section`
   border-radius: 5px;
-  background-color: ${(props) => (props.completed ? "#f1356d" : "#347FC4")};
+  background-color: ${(props) => (props.completed ? "#f1356d" : "#011c27")};
   color: white;
   font-size: 1.4rem;
   font-weight: bold;

@@ -13,14 +13,15 @@ export default Header;
 const TitleContainer = styled.section`
   background-color: #011c27;
   padding: 1em;
-  position: relative;
-  height: 6em;
+  height: 3em;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 const Title = styled.h1`
-  font-size: 5rem;
+  font-size: 2rem;
   color: #f1356d;
-  position: absolute;
-  top: -13%;
-  left: 5%;
 `;

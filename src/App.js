@@ -83,7 +83,7 @@ function App() {
           path="/"
           element={
             <>
-              <Header heading={"ToDo-App"}></Header>
+              <Header heading={"New Todos"}></Header>
               <NewToDo addNewItem={addNewItem}></NewToDo>
               <Card>
                 {items
