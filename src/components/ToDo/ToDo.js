@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import styled from "styled-components";
 
 // import ToDoDate from "./ToDoDate";
@@ -11,7 +12,6 @@ function ToDo({
   toggleCompleted,
   toggleArchived,
   deleteItems,
-  editItem,
   editTask,
 }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -34,7 +34,7 @@ function ToDo({
             ></input>
           </section>
           <section>
-            <button
+            <CancelEditButton
               type="button"
               onClick={() => {
                 setIsEditing(false);
@@ -42,37 +42,35 @@ function ToDo({
               }}
             >
               CANCEL
-            </button>
-            <button type="submit">SAVE</button>
+            </CancelEditButton>
+            <SaveEditButton type="submit">SAVE</SaveEditButton>
           </section>
         </form>
       ) : (
         <ToDoContainer completed={completed}>
-          <section completed={completed}>
-            <section>{/* <ToDoDate date={date}></ToDoDate> */}</section>
-            <section archived={archived}>
-              <input type="checkbox" onClick={toggleCompleted}></input>
-            </section>
-            <h2 completed={completed}>{title}</h2>
-            <HideButton archived={archived}>
-              {completed ? (
-                <section>
-                  <button onClick={toggleCompleted}>Uncompleted</button>
-                  <button type="button" onClick={toggleArchived}>
-                    archive
-                  </button>
-                </section>
-              ) : (
-                <section completed={completed}>
-                  <button onClick={toggleCompleted}>Complete</button>
-                  <button onClick={() => setIsEditing(true)}>edit</button>
-                  <button type="button" onClick={deleteItems}>
-                    delete
-                  </button>
-                </section>
-              )}
-            </HideButton>
-          </section>
+          <p completed={completed}>{title}</p>
+          <HideButton archived={archived}>
+            {completed ? (
+              <ButtonGroup>
+                <UncompletedButton onClick={toggleCompleted}>
+                  Uncompleted
+                </UncompletedButton>
+                <ArchiveButton type="button" onClick={toggleArchived}>
+                  archive
+                </ArchiveButton>
+              </ButtonGroup>
+            ) : (
+              <ButtonGroup completed={completed}>
+                <CompleteButton onClick={toggleCompleted}>
+                  complete
+                </CompleteButton>
+                <EditButton onClick={() => setIsEditing(true)}>edit</EditButton>
+                <DeleteButton type="button" onClick={deleteItems}>
+                  delete
+                </DeleteButton>
+              </ButtonGroup>
+            )}
+          </HideButton>
         </ToDoContainer>
       )}
     </>
@@ -82,16 +80,15 @@ function ToDo({
 export default ToDo;
 
 const ToDoContainer = styled.section`
-  border-radius: 5px;
-  background-color: ${(props) => (props.completed ? "#f1356d" : "#011c27")};
-  color: white;
-  font-size: 1.4rem;
-  font-weight: bold;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  padding: 0 2em;
-  margin: 1em 4em;
+  justify-content: space-between;
+  background-color: ${(props) => (props.completed ? "#4285f4" : "white")};
+  font-size: 1rem;
+  color: ${(props) => (props.completed ? "white" : "black")};
+  border-bottom: 1px solid black;
+  font-weight: bold;
+  padding-left: 0.1em;
   &:hover {
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
   }
@@ -101,11 +98,105 @@ const HideButton = styled.section`
   display: ${(props) => (props.archived ? "none" : "")};
 `;
 
-// const ToDoCheckbox = styled.section`
-//   display: ${(props) => (props.archived ? "none" : "")};
-//   transform: scale(2);
-// `;
+const ButtonGroup = styled.section`
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0.4em 0 2em;
+`;
 
-// const ToDoTitle = styled.h2`
-//   text-decoration: ${(props) => (props.completed ? "line-through" : "")};
-// `;
+const CompleteButton = styled.button`
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  border: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background: #2bbbad;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background: #00695c;
+  }
+
+  &:active {
+    background: #bad;
+  }
+`;
+
+const UncompletedButton = styled.button``;
+
+const EditButton = styled.button`
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  border: none;
+  background: #4285f4;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background: #0d47a1;
+  }
+
+  &:active {
+    background: #bad;
+  }
+`;
+
+const DeleteButton = styled.button`
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  border: none;
+  background: #ff4444;
+  color: #fff;
+  cursor: pointer;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  &:hover {
+    background: #cc0000;
+  }
+
+  &:active {
+    background: #bad;
+  }
+`;
+
+const ArchiveButton = styled.button`
+  font-size: 0.8rem;
+  border: none;
+`;
+
+const CancelEditButton = styled.button`
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  border: none;
+  background: #ff4444;
+  color: #fff;
+  cursor: pointer;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  &:hover {
+    background: #cc0000;
+  }
+
+  &:active {
+    background: #bad;
+  }
+`;
+
+const SaveEditButton = styled.button`
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  border: none;
+  background: #00c851;
+  color: #fff;
+  cursor: pointer;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  &:hover {
+    background: #007e33;
+  }
+
+  &:active {
+    background: #bad;
+  }
+`;

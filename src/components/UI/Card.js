@@ -5,8 +5,8 @@ export default function Card({ children }) {
 }
 
 const CardContainer = styled.section`
-  border-radius: 12px;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-  padding: 0 2em;
-  margin: 1em 4em;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 0.6em 0.4em;
+  margin: 1em 1em 5em;
 `;

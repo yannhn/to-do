@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 function InputNewToDo(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -14,28 +13,24 @@ function InputNewToDo(props) {
       title: enteredTitle,
       completed: "",
       archived: "",
-      date: new Date(enteredDate),
     };
 
     props.onNewItem(newItems);
     setEnteredTitle("");
-    setEnteredDate("");
   };
 
   return (
     <InputContainer>
       <InputForm onSubmit={submitHandler}>
-        <section>
-          <label>
-            <InputText
-              type="text"
-              placeholder="New ToDo"
-              value={enteredTitle}
-              onChange={(event) => setEnteredTitle(event.target.value)}
-            ></InputText>
-          </label>
-        </section>
-        <button type="submit">Add</button>
+        <label>
+          <InputText
+            type="text"
+            placeholder="Input your new ToDo"
+            value={enteredTitle}
+            onChange={(event) => setEnteredTitle(event.target.value)}
+          />
+        </label>
+        <EditButton type="submit">add</EditButton>
       </InputForm>
     </InputContainer>
   );
@@ -44,8 +39,6 @@ function InputNewToDo(props) {
 export default InputNewToDo;
 
 const InputContainer = styled.section`
-  display: flex;
-  justify-content: center;
   padding: 1em;
   margin-top: 1em;
 `;
@@ -53,10 +46,29 @@ const InputContainer = styled.section`
 const InputForm = styled.form`
   display: flex;
   align-items: center;
+  justify-content: space-around;
 `;
 
 const InputText = styled.input`
-  padding: 1em;
+  padding: 0.6em;
   border-radius: 5px;
-  border: 2px solid #f1356d;
+  border: 1px solid #0d47a1;
+`;
+
+const EditButton = styled.button`
+  padding: 0.6em 1.4em;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  border: none;
+  background: white;
+  color: #4285f4;
+  cursor: pointer;
+
+  &:hover {
+    background: #0d47a1;
+  }
+
+  &:active {
+    background: #bad;
+  }
 `;

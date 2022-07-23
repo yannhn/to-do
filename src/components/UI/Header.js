@@ -23,5 +23,5 @@ const TitleContainer = styled.section`
 
 const Title = styled.h1`
   font-size: 2rem;
-  color: #f1356d;
+  color: white;
 `;
