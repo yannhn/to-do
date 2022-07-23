@@ -15,8 +15,9 @@ function ToDo({
   editTask,
 }) {
   const [isEditing, setIsEditing] = useState(false);
-
   const [newTitle, setNewTitle] = useState("");
+
+  // TODO: FIX ARCHIVE BUTTON
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -86,7 +87,8 @@ const ToDoContainer = styled.section`
   background-color: ${(props) => (props.completed ? "#4285f4" : "white")};
   font-size: 1rem;
   color: ${(props) => (props.completed ? "white" : "black")};
-  border-bottom: 1px solid black;
+  border-bottom: ${(props) =>
+    props.completed ? "1px solid white" : "1px solid black"};
   font-weight: bold;
   padding-left: 0.1em;
   &:hover {
@@ -123,7 +125,23 @@ const CompleteButton = styled.button`
   }
 `;
 
-const UncompletedButton = styled.button``;
+const UncompletedButton = styled.button`
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  border: none;
+  background: #ff4444;
+  color: #fff;
+  cursor: pointer;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  &:hover {
+    background: #cc0000;
+  }
+
+  &:active {
+    background: #bad;
+  }
+`;
 
 const EditButton = styled.button`
   padding: 0.5em 1em;
@@ -161,8 +179,22 @@ const DeleteButton = styled.button`
 `;
 
 const ArchiveButton = styled.button`
+  font-weight: bold;
+  padding: 0.5em 1em;
   font-size: 0.8rem;
   border: none;
+  background: #aa66cc;
+  color: #fff;
+  cursor: pointer;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  &:hover {
+    background: #9933cc;
+  }
+
+  &:active {
+    background: #bad;
+  }
 `;
 
 const CancelEditButton = styled.button`

@@ -4,15 +4,10 @@ import ToDo from "./components/ToDo/ToDo";
 import NewToDo from "./components/NewToDo/NewToDo";
 import RandomToDo from "./components/ToDo/RandomToDo";
 
-// import InputNewToDo from "./ToDo/InputNewToDo";
-
 import useLocalStorage from "./common/useLocalStorage";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Card from "./components/UI/Card";
-
-// TODO
-// TODO: EDIT ITEMS
 
 function App() {
   const [items, setItems] = useLocalStorage("items", []);
@@ -75,6 +70,8 @@ function App() {
     // setRandom-state filled with randomItem
     setRandom(randomItem);
   }
+
+  // TODO: FIX RANDOM
 
   return (
     <>
