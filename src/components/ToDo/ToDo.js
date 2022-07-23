@@ -50,28 +50,32 @@ function ToDo({
       ) : (
         <ToDoContainer completed={completed}>
           <p completed={completed}>{title}</p>
-          <HideButton archived={archived}>
-            {completed ? (
-              <ButtonGroup>
-                <UncompletedButton onClick={toggleCompleted}>
-                  Uncompleted
-                </UncompletedButton>
-                <ArchiveButton type="button" onClick={toggleArchived}>
-                  archive
-                </ArchiveButton>
-              </ButtonGroup>
-            ) : (
-              <ButtonGroup completed={completed}>
-                <CompleteButton onClick={toggleCompleted}>
-                  complete
-                </CompleteButton>
-                <EditButton onClick={() => setIsEditing(true)}>edit</EditButton>
-                <DeleteButton type="button" onClick={deleteItems}>
-                  delete
-                </DeleteButton>
-              </ButtonGroup>
-            )}
-          </HideButton>
+          {completed && !archived ? (
+            <ButtonGroup>
+              <UncompletedButton onClick={toggleCompleted}>
+                Uncompleted
+              </UncompletedButton>
+              <ArchiveButton type="button" onClick={toggleArchived}>
+                archive
+              </ArchiveButton>
+            </ButtonGroup>
+          ) : archived ? (
+            <ButtonGroup>
+              <DeleteButton type="button" onClick={deleteItems}>
+                delete
+              </DeleteButton>
+            </ButtonGroup>
+          ) : (
+            <ButtonGroup completed={completed}>
+              <CompleteButton onClick={toggleCompleted}>
+                complete
+              </CompleteButton>
+              <EditButton onClick={() => setIsEditing(true)}>edit</EditButton>
+              <DeleteButton type="button" onClick={deleteItems}>
+                delete
+              </DeleteButton>
+            </ButtonGroup>
+          )}
         </ToDoContainer>
       )}
     </>
@@ -94,10 +98,6 @@ const ToDoContainer = styled.section`
   &:hover {
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
   }
-`;
-
-const HideButton = styled.section`
-  display: ${(props) => (props.archived ? "none" : "")};
 `;
 
 const ButtonGroup = styled.section`
