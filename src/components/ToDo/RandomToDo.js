@@ -4,7 +4,7 @@ function RandomToDo({ shuffle }) {
   return (
     <RandomButtonContainer>
       <RandomButton type="Button" onClick={shuffle}>
-        Shuffle
+        Let's shuffle
       </RandomButton>
       <RandomText>Your random ToDo</RandomText>
     </RandomButtonContainer>
@@ -22,14 +22,14 @@ const RandomButtonContainer = styled.section`
 const RandomText = styled.h2`
   font-size: 2rem;
   text-align: center;
-  text-decoration: underline;
+  border-bottom: 1px solid black;
 `;
 
 const RandomButton = styled.button`
-  padding: 1em 4em;
+  padding: 1em 2em;
   border: none;
-  border-radius: 5px;
-  margin: 2em auto;
+  border-radius: 10px;
+  margin: 4em auto 2em;
   background-color: #72a98f;
   color: white;
   font-weight: bold;
@@ -39,5 +39,8 @@ const RandomButton = styled.button`
 
   &:hover {
     background-color: #5d987c;
+  }
+  &:active {
+    background-color: #bad;
   }
 `;

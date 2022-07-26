@@ -61,6 +61,8 @@ function App() {
     // creates new Array with filtered items
     const filteredItems = items.filter((item) => !item.archived);
 
+    const shuffled = items.sort(() => Math.random() - 0.5);
+
     // within the filtered new Array set the randomizer
     const randomArray = Math.floor(Math.random() * filteredItems.length);
 
@@ -133,16 +135,18 @@ function App() {
             <>
               <Header heading={"Random ToDos"}></Header>
               <RandomToDo shuffle={randomItems}></RandomToDo>
-              <ToDo
-                key={random.id}
-                title={random.title}
-                completed={random.completed}
-                archived={random.archived}
-                toggleCompleted={() => toggleCompleted(random.id)}
-                toggleArchived={() => toggleArchived(random.id)}
-                deleteItems={() => deleteItems(random.id)}
-                editTask={(newTitle) => editTask(random.id, newTitle)}
-              ></ToDo>
+              <Card>
+                <ToDo
+                  key={random.id}
+                  title={random.title}
+                  completed={random.completed}
+                  archived={random.archived}
+                  toggleCompleted={() => toggleCompleted(random.id)}
+                  toggleArchived={() => toggleArchived(random.id)}
+                  deleteItems={() => deleteItems(random.id)}
+                  editTask={(newTitle) => editTask(random.id, newTitle)}
+                ></ToDo>
+              </Card>
             </>
           }
         ></Route>
