@@ -61,8 +61,6 @@ function App() {
     // creates new Array with filtered items
     const filteredItems = items.filter((item) => !item.archived);
 
-    const shuffled = items.sort(() => Math.random() - 0.5);
-
     // within the filtered new Array set the randomizer
     const randomArray = Math.floor(Math.random() * filteredItems.length);
 
@@ -74,6 +72,7 @@ function App() {
   }
 
   // TODO: FIX RANDOM
+  // Problem occurs when no todo is entered
 
   return (
     <>
