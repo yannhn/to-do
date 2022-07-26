@@ -27,14 +27,16 @@ function ToDo({
   return (
     <>
       {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <section>
-            <label>CHANGE</label>
+        <EditForm onSubmit={handleSubmit}>
+          <EditFormInput>
+            <label htmlFor="edit-input"></label>
             <input
+              id="edit-input"
+              placeholder="edit your todo"
               onChange={(event) => setNewTitle(event.target.value)}
             ></input>
-          </section>
-          <section>
+          </EditFormInput>
+          <EditFormButton>
             <CancelEditButton
               type="button"
               onClick={() => {
@@ -45,11 +47,11 @@ function ToDo({
               CANCEL
             </CancelEditButton>
             <SaveEditButton type="submit">SAVE</SaveEditButton>
-          </section>
-        </form>
+          </EditFormButton>
+        </EditForm>
       ) : (
         <ToDoContainer completed={completed}>
-          <p completed={completed}>{title}</p>
+          <ToDoTitle completed={completed}>{title}</ToDoTitle>
           {completed && !archived ? (
             <ButtonGroup>
               <UncompletedButton onClick={toggleCompleted}>
@@ -83,6 +85,30 @@ function ToDo({
 }
 
 export default ToDo;
+
+const EditForm = styled.form`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const EditFormInput = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const EditFormButton = styled.section`
+  display: flex;
+  align-items: center;
+`;
+
+const ToDoTitle = styled.p`
+  display: flex;
+  flex-wrap: wrap;
+  text-align: auto;
+  max-width: 40%;
+  word-break: break-word;
+`;
 
 const ToDoContainer = styled.section`
   display: flex;
