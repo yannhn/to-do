@@ -28,15 +28,15 @@ function ToDo({
     <>
       {isEditing ? (
         <EditForm onSubmit={handleSubmit}>
-          <EditFormInput>
+          <EditFormInputSection>
             <label htmlFor="edit-input"></label>
             <input
               id="edit-input"
-              placeholder="edit your todo"
+              placeholder={`edit ${title}`}
               onChange={(event) => setNewTitle(event.target.value)}
             ></input>
-          </EditFormInput>
-          <EditFormButton>
+          </EditFormInputSection>
+          <EditFormButtonSection>
             <CancelEditButton
               type="button"
               onClick={() => {
@@ -47,7 +47,7 @@ function ToDo({
               CANCEL
             </CancelEditButton>
             <SaveEditButton type="submit">SAVE</SaveEditButton>
-          </EditFormButton>
+          </EditFormButtonSection>
         </EditForm>
       ) : (
         <ToDoContainer completed={completed}>
@@ -89,15 +89,19 @@ export default ToDo;
 const EditForm = styled.form`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding-left: 0.1em;
+  padding-bottom: 1em;
 `;
 
-const EditFormInput = styled.section`
+const EditFormInputSection = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const EditFormButton = styled.section`
+const EditFormButtonSection = styled.section`
   display: flex;
   align-items: center;
 `;
