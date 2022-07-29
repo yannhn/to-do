@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import styled from "styled-components";
 
-// import ToDoDate from "./ToDoDate";
-
 function ToDo({
   id,
   title,
