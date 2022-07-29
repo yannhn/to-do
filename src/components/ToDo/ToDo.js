@@ -26,11 +26,11 @@ function ToDo({
         <EditForm onSubmit={handleSubmit}>
           <EditFormInputSection>
             <label htmlFor="edit-input"></label>
-            <input
+            <EditFormInput
               id="edit-input"
               placeholder={`edit ${title}`}
               onChange={(event) => setNewTitle(event.target.value)}
-            ></input>
+            />
           </EditFormInputSection>
           <EditFormButtonSection>
             <CancelEditButton
@@ -95,6 +95,12 @@ const EditFormInputSection = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const EditFormInput = styled.input`
+  padding: 0.6em;
+  border-radius: 5px;
+  border: 1px solid #0d47a1;
 `;
 
 const EditFormButtonSection = styled.section`

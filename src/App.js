@@ -60,6 +60,7 @@ function App() {
   function randomItems() {
     // filter archived items
     // creates new Array with filtered items
+
     const filteredItems = items.filter((item) => !item.archived);
 
     // within the filtered new Array set the randomizer
@@ -72,10 +73,12 @@ function App() {
     setRandom(randomItem);
   }
 
-  function ErrorFallback() {
+  function ErrorFallback({ error, resetErrorBoundary }) {
     return (
       <div role="alert">
-        <p>Something went wrong: Please try again!</p>
+        <p>Something went wrong:</p>
+        <pre>{error.message}</pre>
+        <button onClick={resetErrorBoundary}>Try again</button>
       </div>
     );
   }
@@ -137,14 +140,17 @@ function App() {
         <Route
           path="/Random"
           element={
-            <>
+            <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
               <Header heading={"Random ToDos"}></Header>
+
               <RandomToDo shuffle={randomItems}></RandomToDo>
-              <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <Card>
-                  {Object.keys(random).length === 0 ? (
-                    <p>You have to input a todo in order to shuffle them!</p>
-                  ) : (
+              {Object.keys(random).length === 0 ? (
+                <>
+                  <p>You have to input a todo in order to shuffle them!</p>
+                </>
+              ) : (
+                <>
+                  <Card>
                     <ToDo
                       key={random.id}
                       title={random.title}
@@ -155,10 +161,10 @@ function App() {
                       deleteItems={() => deleteItems(random.id)}
                       editTask={(newTitle) => editTask(random.id, newTitle)}
                     />
-                  )}
-                </Card>
-              </ErrorBoundary>
-            </>
+                  </Card>
+                </>
+              )}
+            </ErrorBoundary>
           }
         ></Route>
       </Routes>
