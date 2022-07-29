@@ -15,8 +15,6 @@ function ToDo({
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
-  // TODO: FIX ARCHIVE BUTTON
-
   const handleSubmit = (event) => {
     event.preventDefault();
     editTask(id, newTitle);

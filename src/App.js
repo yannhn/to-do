@@ -7,6 +7,7 @@ import RandomToDo from "./components/ToDo/RandomToDo";
 import useLocalStorage from "./common/useLocalStorage";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 import Card from "./components/UI/Card";
 
 function App() {
@@ -71,8 +72,13 @@ function App() {
     setRandom(randomItem);
   }
 
-  // TODO: FIX RANDOM
-  // Problem occurs when no todo is entered
+  function ErrorFallback() {
+    return (
+      <div role="alert">
+        <p>Something went wrong: Please try again!</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -98,7 +104,7 @@ function App() {
                       toggleArchived={() => toggleArchived(item.id)}
                       deleteItems={() => deleteItems(item.id)}
                       editTask={editTask}
-                    ></ToDo>
+                    />
                   ))}
               </Card>
             </>
@@ -122,7 +128,7 @@ function App() {
                       toggleCompleted={() => toggleCompleted(item.id)}
                       toggleArchived={() => toggleArchived(item.id)}
                       deleteItems={() => deleteItems(item.id)}
-                    ></ToDo>
+                    />
                   ))}
               </Card>
             </>
@@ -134,18 +140,24 @@ function App() {
             <>
               <Header heading={"Random ToDos"}></Header>
               <RandomToDo shuffle={randomItems}></RandomToDo>
-              <Card>
-                <ToDo
-                  key={random.id}
-                  title={random.title}
-                  completed={random.completed}
-                  archived={random.archived}
-                  toggleCompleted={() => toggleCompleted(random.id)}
-                  toggleArchived={() => toggleArchived(random.id)}
-                  deleteItems={() => deleteItems(random.id)}
-                  editTask={(newTitle) => editTask(random.id, newTitle)}
-                ></ToDo>
-              </Card>
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <Card>
+                  {Object.keys(random).length === 0 ? (
+                    <p>You have to input a todo in order to shuffle them!</p>
+                  ) : (
+                    <ToDo
+                      key={random.id}
+                      title={random.title}
+                      completed={random.completed}
+                      archived={random.archived}
+                      toggleCompleted={() => toggleCompleted(random.id)}
+                      toggleArchived={() => toggleArchived(random.id)}
+                      deleteItems={() => deleteItems(random.id)}
+                      editTask={(newTitle) => editTask(random.id, newTitle)}
+                    />
+                  )}
+                </Card>
+              </ErrorBoundary>
             </>
           }
         ></Route>
