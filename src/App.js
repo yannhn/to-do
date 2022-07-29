@@ -8,7 +8,6 @@ import styled from "styled-components";
 import useLocalStorage from "./common/useLocalStorage";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { ErrorBoundary } from "react-error-boundary";
 import Card from "./components/UI/Card";
 
 function App() {
@@ -74,16 +73,6 @@ function App() {
     setRandom(randomItem);
   }
 
-  function ErrorFallback({ error, resetErrorBoundary }) {
-    return (
-      <div role="alert">
-        <p>Something went wrong:</p>
-        <pre>{error.message}</pre>
-        <button onClick={resetErrorBoundary}>Try again</button>
-      </div>
-    );
-  }
-
   return (
     <>
       <Routes>
@@ -141,7 +130,7 @@ function App() {
         <Route
           path="/Random"
           element={
-            <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
+            <>
               <Header heading={"Random ToDos"}></Header>
               <RandomToDo shuffle={randomItems}></RandomToDo>
               {random === undefined ? (
@@ -166,7 +155,7 @@ function App() {
                   </Card>
                 </>
               )}
-            </ErrorBoundary>
+            </>
           }
         ></Route>
       </Routes>
