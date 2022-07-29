@@ -1,6 +1,6 @@
 # todo
 
-I coded a small ToDo-app as part of the neuefische-bootcamp and used styled-components to style the ui.
+I coded a small ToDo-app in react as part of the neuefische-bootcamp and used styled-components to style the ui.
 
 ## Used technology
 
