@@ -4,6 +4,7 @@ import ToDo from "./components/ToDo/ToDo";
 import NewToDo from "./components/NewToDo/NewToDo";
 import RandomToDo from "./components/ToDo/RandomToDo";
 
+import styled from "styled-components";
 import useLocalStorage from "./common/useLocalStorage";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -142,12 +143,13 @@ function App() {
           element={
             <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
               <Header heading={"Random ToDos"}></Header>
-
               <RandomToDo shuffle={randomItems}></RandomToDo>
-              {Object.keys(random).length === 0 ? (
-                <>
-                  <p>You have to input a todo in order to shuffle them!</p>
-                </>
+              {random === undefined ? (
+                <Card>
+                  <ErrorMessage>
+                    You have to set ToDos in order to shuffle them!
+                  </ErrorMessage>
+                </Card>
               ) : (
                 <>
                   <Card>
@@ -174,3 +176,9 @@ function App() {
 }
 
 export default App;
+
+const ErrorMessage = styled.p`
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+`;
